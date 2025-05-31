@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioStride - Pitch Deck</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        
+        .slide {
+            min-height: 100vh;
+            padding: 60px 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+        }
+        
+        .slide:nth-child(even) {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+        
+        h1 {
+            font-size: 4em;
+            font-weight: 800;
+            margin-bottom: 30px;
+            background: linear-gradient(45deg, #00d4ff, #0099ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+        
+        h2 {
+            font-size: 3em;
+            font-weight: 700;
+            margin-bottom: 40px;
+            color: #00d4ff;
+        }
+        
+        h3 {
+            font-size: 2em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #00b4d8;
+        }
+        
+        .tagline {
+            font-size: 1.8em;
+            color: #90e0ef;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+        
+        .hero-stat {
+            font-size: 5em;
+            font-weight: 900;
+            color: #ff006e;
+            margin: 20px 0;
+            text-shadow: 0 0 30px rgba(255, 0, 110, 0.5);
+        }
+        
+        .stat-description {
+            font-size: 1.4em;
+            color: #caf0f8;
+            margin-bottom: 30px;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin: 40px 0;
+        }
+        
+        .grid-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.2);
+            border-color: #00d4ff;
+        }
+        
+        .metric {
+            font-size: 3em;
+            font-weight: 700;
+            color: #00d4ff;
+            margin-bottom: 10px;
+        }
+        
+        .metric-label {
+            font-size: 1.2em;
+            color: #90e0ef;
+        }
+        
+        .feature-list {
+            list-style: none;
+            margin: 30px 0;
+        }
+        
+        .feature-list li {
+            font-size: 1.4em;
+            margin: 20px 0;
+            padding-left: 40px;
+            position: relative;
+            color: #caf0f8;
+        }
+        
+        .feature-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #00ff88;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 40px 0;
+            font-size: 1.2em;
+        }
+        
+        .comparison-table th {
+            background: rgba(0, 212, 255, 0.2);
+            padding: 20px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .comparison-table td {
+            padding: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .comparison-table tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .highlight {
+            background: linear-gradient(45deg, #ff006e, #8338ec);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+        
+        .timeline {
+            position: relative;
+            margin: 40px 0;
+        }
+        
+        .timeline-item {
+            display: flex;
+            margin: 30px 0;
+            align-items: center;
+        }
+        
+        .timeline-marker {
+            width: 20px;
+            height: 20px;
+            background: #00d4ff;
+            border-radius: 50%;
+            margin-right: 30px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .timeline-content {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin: 40px 0;
+        }
+        
+        .team-member {
+            text-align: center;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .team-member h4 {
+            font-size: 1.8em;
+            color: #00d4ff;
+            margin-bottom: 10px;
+        }
+        
+        .team-member p {
+            font-size: 1.2em;
+            color: #90e0ef;
+            margin-bottom: 20px;
+        }
+        
+        .credentials {
+            font-size: 1.1em;
+            color: #caf0f8;
+            line-height: 1.8;
+        }
+        
+        .vision-statement {
+            font-size: 2.5em;
+            font-weight: 300;
+            line-height: 1.6;
+            color: #caf0f8;
+            text-align: center;
+            margin: 60px 0;
+        }
+        
+        .cta {
+            background: linear-gradient(45deg, #00d4ff, #0099ff);
+            color: #000;
+            padding: 20px 60px;
+            font-size: 1.6em;
+            font-weight: 700;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 40px auto;
+            display: block;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .cta:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.4);
+        }
+        
+        .slide-number {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 1.2em;
+        }
+        
+        .logo {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #00d4ff;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Slide 1: Title -->
+    <div class="slide">
+        <div class="logo">BioStride</div>
+        <h1>BioStride</h1>
+        <p class="tagline">Universal Biosensors for Early Disease Detection</p>
+        <div style="margin: 60px 0;">
+            <p style="font-size: 1.8em; color: #90e0ef; margin-bottom: 20px;">Democratizing Healthcare Through Innovation</p>
+            <p style="font-size: 1.4em; color: #caf0f8;">One Device. Multiple Diseases. 5 Minutes.</p>
+        </div>
+        <div style="margin-top: 80px;">
+            <p style="font-size: 1.2em; color: #90e0ef;">WTF Fund Application 2025</p>
+            <p style="font-size: 1.1em; color: #caf0f8;">Anagh Sinha</p>
+        </div>
+        <div class="slide-number">1</div>
+    </div>
+
+    <!-- Slide 2: The Problem -->
+    <div class="slide">
+        <div class="logo">BioStride</div>
+        <h2>The Silent Crisis</h2>
+        <div class="hero-stat pulse">Every 4 Minutes</div>
+        <p class="stat-description">Someone dies from undetected oral cancer in India</p>
+        
+        <div class="grid" style="margin-top: 60px;">
+            <div class="card">
+                <div class="metric">80%</div>
+                <div class="metric-label">Cases detected in late stages in India</div>
+                <p style="margin-top: 15px; color: #caf0f8;">vs 40% in developed countries</p>
+            </div>
+            <div class="card">
+                <div class="metric">₹20,000+</div>
+                <div class="metric-label">Cost of traditional lab tests</div>
+                <p style="margin-top: 15px; color: #caf0f8;">3-7 days waiting time</p>
+            </div>
+        </div>
+        
+        <div style="margin-top: 60px; text-align: center;">
+            <p style="font-size: 1.8em; color: #ff006e; font-weight: 600;">
+                India: 1/3rd of global oral cancer burden
+            </p>
+            <p style="font-size: 1.4em; color: #caf0f8; margin-top: 20px;">
+                600 million people lack access to early detection
+            </p>
+        </div>
+        <div class="slide-number">2</div>
+    </div>
+
+    <!-- Slide 3: Personal Story -->
+    <div class="slide">
+        <div class="logo">BioStride</div>
+        <h2>Why This Matters To Me</h2>
+        <div style="max-width: 900px; margin: 0 auto;">
+            <p style="font-size: 1.6em; line-height: 1.8; color: #caf0f8; margin-bottom: 40px;">
+                At 19, I was admitted to ICU for months with <span class="highlight">80% lung fibrosis</span>  
+                Watching fellow patients arrive too late for treatment ignited my mission.
+            </p>
+            <p style="font-size: 1.4em; line-height: 1.8; color: #90e0ef; margin-bottom: 40px;">
+                My recovery transformed me from patient to researcher, driven to ensure no family 
+                endures preventable loss from late-stage disease detection.
+            </p>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <strong>2021:</strong> ICU experience sparks mission
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <strong>2022-23:</strong> Research at BITS Pilani, University of Tokyo
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <strong>2024:</strong> ETH Zurich thesis, Amgen Award Winner
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <strong>2025:</strong> BioStride launch - Making detection accessible
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-number">3</div>
+    </div>
+
+    <!-- Slide 4: Solution -->
+    <div class="slide">
+        <div class="logo">BioStride</div>
+        <h2>The Solution: BioStride</h2>
+        <p class="tagline">Revolutionary biosensor platform for point-of-care diagnostics</p>
+        
+        BioStride aims to democratize early disease detection. Our affordable, portable, and accurate biosensing technology offers a universal handheld platform. It uses transistor-based test strips for multi-disease detection from saliva or blood samples.
+
+        
+        <div class="grid grid-3" style="margin-top: 60px;">
+            <div class="card">
+                <h3 style="color: #00ff88;">Universal Reader</h3>
+                <p style="font-size: 1.2em;">One device detects multiple diseases</p>
+                <div class="metric" style="margin-top: 20px;">₹4,999</div>
+                <div class="metric-label">Device cost</div>
+            </div>
+            <div class="card">
+                <h3 style="color: #00ff88;">Disease Strips</h3>
+                <p style="font-size: 1.2em;">Interchangeable cartridges for each disease</p>
+                <div class="metric" style="margin-top: 20px;">₹50</div>
+                <div class="metric-label">Per test</div>
+            </div>
+            <div class="card">
+                <h3 style="color: #00ff88;">Instant Results</h3>
+                <p style="font-size: 1.2em;">AI-powered analysis in minutes</p>
+                <div class="metric" style="margin-top: 20px;">5 min</div>
+                <div class="metric-label">Result time</div>
+            </div>
+        </div>
+        
+        <ul class="feature-list">
+            <li>Transistor-based sensing with 0.1 pg/mL sensitivity</li>
+            <li>92% clinical accuracy validated in trials</li>
+            <li>No lab infrastructure or trained personnel required</li>
+            <li>Smartphone connectivity for result tracking</li>
+        </ul>
+        <div class="slide-number">4</div>
+    </div>
+
+    <!-- Slide 5: Technology -->
+    <div class="slide">
+        <div class="logo">BioStride</div>
+        <h2>Breakthrough Technology</h2>
+        
+        <div style="text-align: center; margin-bottom: 60px;">
+            <p style="font-size: 1.6em; color: #90e0ef;">
+                Combining cutting-edge research from world's top institutions
+            </p>
+        </div>
+        
+        <div class="grid">
+            <div class="card">
+                <h3>Core Innovation</h3>
+                <ul style="list-style: none; font-size: 1.2em; line-height: 2;">
+                    <li>🔬 Click chemistry bioconjugation</li>
+                    <li>🧪 Carbon nanotube electrodes</li>
+                    <li>📊 AI-enhanced signal processing</li>
+                    <li>🔐 Proprietary stabilization method</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Research Credentials</h3>
+                <ul style="list-style: none; font-size: 1.2em; line-height: 2;">
+                    <li>📚 Published paper on biosensing</li>
+                    <li>🏆 Amgen Best Poster Award 2024</li>
+                    <li>🔬 ETH Zurich synthetic biology</li>
+                    <li>🤖 Tokyo U. AI cell sorting</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div style="margin-top: 60px; background: rgba(0, 255, 136, 0.1); padding: 40px; border-radius: 20px; border: 1px solid rgba(0, 255, 136, 0.3);">
+            <h3 style="text-align: center; color: #00ff88;">Key Differentiator</h3>
+            <p style="font-size: 1.4em; text-align: center; color: #caf0f8; margin-top: 20px;">
+                100x more sensitive than lateral flow tests<br>
+                400x cheaper than laboratory diagnostics
+            </p>
+        </div>
+        <div class="slide-number">5</div>
+    </div>
+
+    <!-- Slide 6: Market Opportunity -->
+    <div class="slide">
+        <div class="logo">BioStride</div>
+        <h2>Massive Market Opportunity</h2>
+        
+        <div class="hero-stat">$22.12B</div>
+        <p class="stat-description">Global POC biosensors market by 2030 (8.5% CAGR)</p>
+        
+        <div class="grid grid-3" style="margin-top: 60px;">
+            <div class="card">
+                <h4 style="color: #00d4ff; margin-bottom: 20px;">India POC Market</h4>
+                <div class="metric">$4.2B</div>
+                <div class="metric-label">by 2030</div>
+                <p style="margin-top: 15px; color: #caf0f8;">Growing at 15% CAGR</p>
+            </div>
+            <div class="card">
+                <h4 style="color: #00d4ff; margin-bottom: 20px;">Oral Cancer TAM</h4>
+                <div class="metric">₹4,500Cr</div>
+                <div class="metric-label">India market</div>
+                <p style="margin-top: 15px; color: #caf0f8;">200M at-risk population</p>
+            </div>
+            <div class="card">
+                <h4 style="color: #00d4ff; margin-bottom: 20px;">Expansion Markets</h4>
+                <div class="metric">$53B</div>
+                <div class="metric-label">Multi-disease</div>
+                <p style="margin-top: 15px; color: #caf0f8;">HIV, Hepatitis, NCDs</p>
+            </div>
+        </div>
+        
+        <div style="margin-top: 60px;">
+            <h3>Target Segments</h3>
+            <ul class="feature-list">
+                <li>100,000+ dental clinics seeking rapid screening tools</li>
+                <li>5,000+ pharmacy chains expanding health services</li>
+                <li>Government programs (Ayushman Bharat) mandating screening</li>
+                <li>Corporate wellness programs for employee health</li>
+            </ul>
+        </div>
+        <div class="slide-number">6</div>
+    </div>
+
+    <!-- Slide 7: Business Model -->
+    <div class="slide">
+        <div class="logo">BioStride</div>
+        <h2>Razor-Blade Business Model</h2>
+        
+        <div class="grid">
+            <div class="card">
+                <h3>Revenue Streams</h3>
+                <ul style="list-style: none; font-size: 1.3em; line-height: 2.2;">
+                    <li>📱 <strong>Hardware:</strong> ₹4,999/reader (60% margin)</li>
+                    <li>🔄 <strong>Consumables:</strong> ₹50-150/strip (85% margin)</li>
+                    <li>📊 <strong>Data Analytics:</strong> ₹10/test to pharma</li>
+                    <li>🏢 <strong>B2B Packages:</strong> Corporate screening</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Unit Economics</h3>
+                <div style="margin-top: 30px;">
+                    <div class="metric">₹2,400</div>
+                    <div class="metric-label">Customer Lifetime Value</div>
+                </div>
+                <div style="margin-top: 30px;">
+                    <div class="metric">8 strips</div>
+                    <div class="metric-label">Per reader per month</div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="margin-top: 60px; text-align: center;">
+            <h3>Projected Revenue</h3>
+            <div style="display: flex; justify-content: space-around; margin-top: 40px;">
+                <div>
+                    <p style="color: #90e0ef; font-size: 1.2em;">Year 1</p>
+                    <p class="metric">₹50L</p>
+                </div>
+                <div>
+                    <p style="color: #90e0ef; font-size: 1.2em;">Year 2</p>
+                    <p class="metric">₹5.2Cr</p>
+                </div>
+                <div>
+                    <p style="color: #90e0ef; font-size: 1.2em;">Year 3</p>
+                    <p class="metric">₹31Cr</p>
+                </div>
+            </div>
+        </div>
+        <div class="slide-number">7</div>
+    </div>
+
+    <!-- Slide 8: Go-to-Market -->
+    <div class="slide">
+        <div class="logo">BioStride</div>
+        <h2>Go-to-Market Strategy</h2>
+        
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-marker" style="background: #00ff88;"></div>
+                <div class="timeline-content">
+                    <h4 style="color: #00ff88;">Phase 1: Clinical Validation (Months 1-6)</h4>
+                    <p>Partner with 10 dental clinics in Jaipur for pilot program</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-marker" style="background: #00d4ff;"></div>
+                <div class="timeline-content">
+                    <h4 style="color: #00d4ff;">Phase 2: Metro Expansion (Months 7-12)</h4>
+                    <p>Apollo, MedPlus pharmacy chains - 500 locations</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-marker" style="background: #0099ff;"></div>
+                <div class="timeline-content">
+                    <h4 style="color: #0099ff;">Phase 3: Government Integration (Year 2)</h4>
+                    <p>Ayushman Bharat centers, PHCs - 5,000 touchpoints</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-marker" style="background: #ff006e;"></div>
+                <div class="timeline-content">
+                    <h4 style="color: #ff006e;">Phase 4: Rural Penetration (Year 3)</h4>
+                    <p>ASHA workers, CSR partnerships - 50,000 devices</p>
+                </div>
+            </div>
+        </div>
+        
+        <div style="margin-top: 60px; text-align: center;">
+            <p style="font-size: 1.6em; color: #caf0f8;">
+                <strong>Key Partnerships:</strong> SMS Hospital Jaipur • BITS and ETH Research Nanomaterials and Tumour Microenvironment Research Labs
+            
+            </p>
+        </div>
+        <div class="slide-number">8</div>
+    </div>
+
+    <!-- Slide 9: Competitive Advantage -->
+    <div class="slide">
+        <div class="logo">BioStride</div>
+        <h2>Why We Win</h2>
+        
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th style="background: rgba(0, 255, 136, 0.3);">BioStride</th>
+                    <th>Lab Tests</th>
+                    <th>Lateral Flow</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Time to Result</td>
+                    <td style="color: #00ff88; font-weight: 700;">5 minutes</td>
+                    <td>3-7 days</td>
+                    <td>15 minutes</td>
+                </tr>
+                <tr>
+                    <td>Cost per Test</td>
+                    <td style="color: #00ff88; font-weight: 700;">₹50</td>
+                    <td>₹15,000+</td>
+                    <td>₹200</td>
+                </tr>
+                <tr>
+                    <td>Accuracy</td>
+                    <td style="color: #00ff88; font-weight: 700;">92%</td>
+                    <td>95%</td>
+                    <td>70%</td>
+                </tr>
+                <tr>
+                    <td>Multi-disease</td>
+                    <td style="color: #00ff88; font-weight: 700;">Yes</td>
+                    <td>No</td>
+                    <td>No</td>
+                </tr>
+                <tr>
+                    <td>Training Required</td>
+                    <td style="color: #00ff88; font-weight: 700;">Minimal</td>
+                    <td>High</td>
+                    <td>Moderate</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div style="margin-top: 60px;">
+            <h3>Defensible Moats</h3>
+            <ul class="feature-list">
+                <li>18-month R&D head start with proprietary nanomaterial biosensors</li>
+                <li>Developed a label-free electrochemical sensor using ITO microelectrodes and PMMA nanofibers.</li>
+                <li>Prototype validated: Differentiates oral cancer from benign conditions</li>
+                <li>Established partnerships with two oral oncology research labs for further development.</li>
+                <li>Published research paper on nanomaterial biosensors.</li>   
+                <li>92% of surveyed dentists expressed purchase interest</li>
+                <li>Utilizes advanced transistor-based test strips, similar to glucometers, for precise detection.</li>
+            </ul>
+        </div>
+        <div class="slide-number">9</div>
+    </div>
+
+    <!-- Slide 11: Team -->
+    <div class="slide">
+        <div class="logo">BioStride</div>
+        <h2>The Team</h2>
+        
+        <div class="team-grid">
+            <div class="team-member">
+                <h4>Anagh Sinha</h4>
+                <p>CEO & Co-founder</p>
+                <div class="credentials">
+                    • BITS Pilani, Dual Degree MS Biology and BEng. Electronics and Inst.<br>
+                    • Research: Tokyo U., ETH Zurich<br>
+                    • Amgen Award Winner 2024<br>
+                    • Published researcher<br>
+                    • 2x entrepreneur (exit: D2C startup)
+                </div>
+            </div>
+            <div class="team-member">
+                <h4>Dr. Saloni Sinha</h4>
+                <p>CMO & Co-founder</p>
+                <div class="credentials">
+                    • MD Pediatrics, SMS Medical<br>
+                    • Clinical expertise in POC diagnostics<br>
+                    • 5+ years treating underserved patients<br>
+                    • Published in pediatric journals<br>
+                    • Passionate about accessible healthcare
+                </div>
+            </div>
+        </div>
+        
+        <div style="margin-top: 60px; text-align: center;">
+            <h3>Why We're the Right Team</h3>
+            <div style="max-width: 800px; margin: 30px auto;">
+                <p style="font-size: 1.4em; color: #caf0f8; line-height: 1.8;">
+                    Unique blend of <span class="highlight">cutting-edge research</span> and 
+                    <span class="highlight">clinical understanding</span>. Personal experience 
+                    drives our mission to democratize early detection.
+                </p>
+            </div>
+        </div>
+        
+    
+    <!-- Slide 12: Financial Projections -->
+    <div class="slide">
+        <div class="logo">BioStride</div>
+        <h2>Financial Projections</h2>
+        
+        <div style="text-align: center; margin-bottom: 60px;">
+            <p style="font-size: 1.6em; color: #90e0ef;">
+                Conservative projections based on capturing just 0.5% of addressable market
+            </p>
+        </div>
+        
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>Metric</th>
+                    <th>Year 1</th>
+                    <th>Year 2</th>
+                    <th>Year 3</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Devices Deployed</td>
+                    <td>1,000</td>
+                    <td>10,000</td>
+                    <td>50,000</td>
+                </tr>
+                <tr>
+                    <td>Tests Conducted</td>
+                    <td>50,000</td>
+                    <td>800,000</td>
+                    <td>4.8M</td>
+                </tr>
+                <tr>
+                    <td>Revenue</td>
+                    <td style="color: #00ff88; font-weight: 700;">₹50L</td>
+                    <td style="color: #00ff88; font-weight: 700;">₹5.2Cr</td>
+                    <td style="color: #00ff88; font-weight: 700;">₹31Cr</td>
+                </tr>
+                <tr>
+                    <td>Gross Margin</td>
+                    <td>65%</td>
+                    <td>72%</td>
+                    <td>78%</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div style="margin-top: 60px;">
+            <h3>Key Assumptions</h3>
+            <ul class="feature-list">
+                <li>8 strips per device per month average usage</li>
+                <li>₹50 average strip price (oral cancer)</li>
+                <li>25% quarterly device growth post-launch</li>
+                <li>85% customer retention rate</li>
+            </ul>
+        </div>
+        <div class="slide-number">12</div>
+    </div>
+
+    <!-- Slide 13: Use of WTF Funds -->
+    <div class="slide">
+        <div class="logo">BioStride</div>
+        <h2>Use of ₹20 Lakh Grant</h2>
+        
+        <div style="text-align: center; margin-bottom: 60px;">
+            <p style="font-size: 1.6em; color: #90e0ef;">
+                Strategic allocation to achieve critical milestones
+            </p>
+        </div>
+        
+        <div class="grid">
+            <div class="card">
+                <h3 style="color: #ff006e;">Clinical Validation</h3>
+                <div class="metric">₹8L</div>
+                <div class="metric-label">40% of funds</div>
+                <ul style="list-style: none; margin-top: 20px; font-size: 1.1em;">
+                    <li>• 500-patient multi-site trial</li>
+                    <li>• Biostatistician consultation</li>
+                    <li>• Regulatory documentation</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3 style="color: #00d4ff;">Product Development</h3>
+                <div class="metric">₹6L</div>
+                <div class="metric-label">30% of funds</div>
+                <ul style="list-style: none; margin-top: 20px; font-size: 1.1em;">
+                    <li>• Device miniaturization</li>
+                    <li>• Strip manufacturing setup</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="grid" style="margin-top: 40px;">
+            <div class="card">
+                <h3 style="color: #00ff88;">Market Entry</h3>
+                <div class="metric">₹4L</div>
+                <div class="metric-label">20% of funds</div>
+                <ul style="list-style: none; margin-top: 20px; font-size: 1.1em;">
+                    <li>• 10-clinic pilot program</li>
+                    <li>• Training materials</li>
+                    <li>• Initial inventory</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3 style="color: #8338ec;">Operations</h3>
+                <div class="metric">₹2L</div>
+                <div class="metric-label">10% of funds</div>
+                <ul style="list-style: none; margin-top: 20px; font-size: 1.1em;">
+                    <li>• Regulatory consultant</li>
+                    <li>• Trial coordinator</li>
+                    <li>• Legal & IP</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div style="margin-top: 60px; text-align: center;">
+            <p style="font-size: 1.6em; color: #caf0f8;">
+                Every rupee focused on reaching <span class="highlight">Pre-Series A readiness</span> in 12 months
+            </p>
+        </div>
+        <div class="slide-number">13</div>
+    </div>
+
+    <!-- Slide 14: Why WTF Fund -->
+    <div class="slide">
+        <div class="logo">BioStride</div>
+        <h2>Why WTF Fund + BioStride = Perfect Fit</h2>
+        
+        <div style="margin-bottom: 60px;">
+            <ul class="feature-list">
+                <li><strong>Top 1% Credentials:</strong> BITS undergrad with research at Tokyo + ETH Zurich</li>
+                <li><strong>Proven Builder:</strong> Built and exited D2C startup while studying</li>
+                <li><strong>Award Winner:</strong> Amgen International Award, IIE Invent Award</li>
+                <li><strong>Published Researcher:</strong> First paper at 21, working on Biosensors and AI for healthcare</li>
+            </ul>
+        </div>
+        
+        <div class="grid">
+            <div class="card">
+                <h3>What We Need from WTF</h3>
+                <ul style="list-style: none; font-size: 1.2em; line-height: 2;">
+                    <li>✓ GTM Studio expertise</li>
+                    <li>✓ Regulatory mentorship</li>
+                    <li>✓ Healthcare connections</li>
+                    <li>✓ Series A preparation</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>What We Bring to WTF</h3>
+                <ul style="list-style: none; font-size: 1.2em; line-height: 2;">
+                    <li>✓ Core HealthTech disruptor from India</li>
+                    <li>✓ Massive social impact story</li>
+                    <li>✓ Deep technical moat</li>
+                    <li>✓ Coachable founders</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div style="margin-top: 60px; text-align: center;">
+            <p style="font-size: 1.8em; color: #caf0f8; line-height: 1.6;">
+                "Having learned from my first startup's failures, I'm eager to leverage 
+                WTF's operator-first mentorship to build India's next healthcare unicorn"
+            </p>    
+            <p style="font-size: 1.2em; color: #90e0ef; margin-top: 20px;">- Anagh Sinha</p>
+        </div>
+        <div class="slide-number">14</div>
+    </div>
+
+    <!-- Slide 15: Vision & Impact -->
+    <div class="slide">
+        <div class="logo">BioStride</div>
+        <h2>Our Vision for India</h2>
+        
+        <div class="vision-statement">
+            By 2030, every Indian will have access to<br>
+            <span class="highlight">early disease detection</span><br>
+            within 5 kilometers of their home
+        </div>
+        
+        <div class="grid grid-3">
+            <div class="card">
+                <div class="metric">100K</div>
+                <div class="metric-label">Lives saved annually</div>
+            </div>
+            <div class="card">
+                <div class="metric">₹5,000Cr</div>
+                <div class="metric-label">Healthcare costs reduced</div>
+            </div>
+            <div class="card">
+                <div class="metric">10M</div>
+                <div class="metric-label">Tests by Year 5</div>
+            </div>
+        </div>
+        
+        <div style="margin-top: 80px; text-align: center;">
+            <h3 style="color: #00ff88; margin-bottom: 40px;">From ICU Patient to Healthcare Revolutionary</h3>
+            <p style="font-size: 1.8em; color: #caf0f8; line-height: 1.6;">
+                Let's make late-stage diagnosis obsolete.<br>
+                <span style="font-size: 1.2em;">Together.</span>
+            </p>
+        </div>
+        
+        <button class="cta">Join Our Mission</button> <link rel="stylesheet" href="https://www.linkedin.com/in/anagh-sinha-/">              
+        
+        <div style="margin-top: 60px; text-align: center;">
+            <p style="font-size: 1.2em; color: #90e0ef;">
+                Contact: anaghsinha01@gmail.com | +91 772-685-2136
+            </p>
+        </div>
+        <div class="slide-number">15</div>
+    </div>
+</body>
+</html>
